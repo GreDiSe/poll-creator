@@ -4,6 +4,7 @@ export const theme = {
         primary: '#27A98B',
         lightGray: '#F2EEEE',
         whiteSmoke: '#F8F8F8',
+        white: '#fff',
         darkGray: '#818181',
         danger: '#E15241',
     },

@@ -6,3 +6,4 @@ export interface Poll {
 }
 
 export type NewPoll = Omit<Poll, 'id' | 'createdAt'>;
+export type EditPoll = Omit<Poll, 'createdAt'>;

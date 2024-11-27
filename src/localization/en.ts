@@ -22,6 +22,7 @@ export const en = {
         options: 'Options:',
         close: 'Close',
         delete: 'Delete',
+        edit: 'Edit',
     },
     notifications: {
         pollCreated: 'Poll created successfully!',

@@ -1,7 +1,7 @@
 import { Poll, NewPoll } from '../types';
 
 // Might be a good idea to not move it to a .env file
-const API_BASE_URL = 'https://6626a09d052332d553238268.mockapi.io/api/polls-example';
+const API_BASE_URL = 'https://6626a09d052332d553238268.mockapi.io/api/polls-dmytro-hrechko';
 
 export const pollsApi = {
     getPolls: async (): Promise<Poll[]> => {
@@ -13,6 +13,18 @@ export const pollsApi = {
     createPoll: async (poll: NewPoll): Promise<Poll> => {
         const response = await fetch(`${API_BASE_URL}`, {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(poll),
+        });
+        if (!response.ok) throw new Error('Failed to create poll');
+        return response.json();
+    },
+
+    updatePoll: async (poll: NewPoll, id: string): Promise<Poll> => {
+        const response = await fetch(`${API_BASE_URL}/${id}`, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },

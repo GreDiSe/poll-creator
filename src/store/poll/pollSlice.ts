@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Poll } from '../../types';
+import {EditPoll, Poll} from '../../types';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { t } from 'i18next';
 import { fetchPolls, deletePoll, submitPollForm } from './pollThunks';
@@ -12,6 +12,7 @@ interface PollState {
         deleteError?: string;
     };
     form: {
+        id?: string;
         question: string;
         newOption: string;
         options: string[];
@@ -65,6 +66,13 @@ const pollSlice = createSlice({
             state.form.newOption = '';
             state.form.errors = {};
         },
+        setEditPollForm: (state, action: PayloadAction<Poll>) => {
+                state.form = {
+                    ...action.payload,
+                    newOption: '',
+                    errors: {},
+                };
+            },
         removeOption: (state, action: PayloadAction<number>) => {
             state.form.options = state.form.options.filter((_, i) => i !== action.payload);
         },
@@ -116,6 +124,6 @@ const pollSlice = createSlice({
     },
 });
 
-export const { setQuestion, setNewOption, addOption, removeOption, setErrors, resetForm, setSelectedPoll, setDeleteError } = pollSlice.actions;
+export const { setQuestion, setNewOption, addOption, removeOption, setErrors, resetForm, setEditPollForm, setSelectedPoll, setDeleteError } = pollSlice.actions;
 
 export default pollSlice.reducer;
